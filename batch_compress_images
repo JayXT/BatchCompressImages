@@ -1,0 +1,11 @@
+#! /bin/bash
+ 
+shopt -s nullglob
+
+for file in *.jpg *.JPG *.png *.PNG *.TIF ; do
+	if [[ "$file" == *"_compressed"* ]]; then
+		continue
+	fi
+
+	convert "${file}" -quality ${1-30} "${file%.*}_compressed.${file##*.}"
+done
